@@ -1,4 +1,5 @@
 from flask import Flask, jsonify
+import db_utils
 
 app = Flask(__name__)
 
@@ -8,6 +9,7 @@ def index():
 
 @app.route('/pads', methods=['POST'])
 def add_pad():
+    print(request.data)
     return 'id'
 
 @app.route('/pads', methods=['GET'])
