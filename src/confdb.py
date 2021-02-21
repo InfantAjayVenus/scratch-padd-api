@@ -1,21 +1,11 @@
-from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker
-from sqlalchemy.ext.declarative import declarative_base
-from sqlalchemy import Column, Integer, String, Text, Sequence
+from flask_sqlalchemy import SQLAlchemy
 
-Base = declarative_base()
+# type: ignore
+db = SQLAlchemy()
 
-class Pad(Base):
-    __tablename__ = 'pad'
-    id = Column(Integer, Sequence('user_id_seq'), primary_key=True, nullable=False)
-    title = Column(String, nullable=False)
-    content = Column(Text, nullable=False)
 
-try:
-    engine = create_engine("sqlite:///dev.db")
-    session = sessionmaker(bind=engine)()
-    Base.metadata.create_all(engine)
-
-except Exception:
-    print('>>>>>>>>Error Initializing DB<<<<<<<<<<<')
-    print(Exception)
+def init_db(app):
+    db.init_app(app)
+    app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///dev.db"
+    app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
+    return db
