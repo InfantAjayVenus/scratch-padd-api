@@ -1,11 +1,7 @@
-from flask import Flask, request, jsonify
-from confdb import init_db
+from flask import request, jsonify
+from config import app, db
 from models import Pad
 
-app = Flask(__name__)
-app.debug = True
-
-db = init_db(app)
 
 
 @app.route('/')
@@ -14,15 +10,16 @@ def index():
 
 
 @app.route('/pads', methods=['POST'])
-def add_pad():
-    post_data = request.get_json()
+def add_pad(): 
     try:
+        post_data = request.json
         new_pad = Pad(title=post_data["title"], content=post_data["content"])
         db.session.add(new_pad)
         db.session.commit()
         return jsonify(new_pad.id)
-    except Exception:
-        print(">>>>>@add_pad<<<<<\n{}".format(Exception))
+    except Exception as e:
+        print(">>>>>@add_pad<<<<<")
+        print(e.args)
         return jsonify({"error": True}), 500
 
 
@@ -47,7 +44,12 @@ def get_pad(id):
 def update_pad(id):
     data = request.get_json()
     pad = Pad.query.get(id)
-    pad.content = data["content"]
+    if "content" in data:
+        pad.content = data["content"]
+
+    if "title" in data:
+        pad.title = data["title"]
+
     db.session.commit()
     return '', 201
 

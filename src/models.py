@@ -1,4 +1,5 @@
-from confdb import db
+from os import getenv
+from config import db
 
 
 class Pad(db.Model):
@@ -22,3 +23,6 @@ class Pad(db.Model):
                 "title": self.title,
                 "content": self.content
                 }
+
+if getenv("ENVIRONMENT") == "dev":
+    db.create_all()
