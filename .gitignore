@@ -1,2 +1,3 @@
 *.db
+instances
 **/__pycache__
