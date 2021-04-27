@@ -32,6 +32,8 @@ def add_pad():
 
 @padds.route('/pads', methods=['GET'])
 def list_pads():
+    error_code = 500
+    error_message = ""
     try:
         return jsonify([{'id': id, 'title': title} for id, title in db.session.query(Pad.id, Pad.title).all()])
     
