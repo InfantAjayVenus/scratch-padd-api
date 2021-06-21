@@ -1,10 +1,12 @@
 from flask import Flask
+from flask_cors import CORS
 from flask_sqlalchemy import SQLAlchemy
 
 db = SQLAlchemy()
 
 def create_app():
     app = Flask(__name__, instance_relative_config=True)
+    cors = CORS(app)
 
     app.config.from_object('config')
     app.config.from_pyfile('config.py')
