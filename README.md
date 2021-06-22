@@ -1,4 +1,4 @@
-# Scratch Pad API
+# Scratch Padd API
 
 A simple API that serves CRUD operations for scratch padd app.
 
@@ -11,9 +11,9 @@ A simple API that serves CRUD operations for scratch padd app.
 **Parameters**: *None*
 **Response**: String("Online")
 
-### 2. Add Pads
+### 2. Add Padds
 
-**Path**: */pads*
+**Path**: */padds*
 **Method**: *POST*
 **Parameters**:
 
@@ -24,38 +24,38 @@ A simple API that serves CRUD operations for scratch padd app.
 
 - *id*[integer]: if success
 
-### 3. List of Pads
+### 3. List of Padds
 
-**Path**: */pads*
+**Path**: */padds*
 **Method**: *GET*
 **Parameters**: *None*
-**Response**: List(Pads)
-Pads:
+**Response**: List(Padds)
+Padds:
 
 - *id*[integer]
 - *title*[string]
 
-### 4. Get Pad Content
+### 4. Get Padd Content
 
-**Path**: */pads/\<id\>*
+**Path**: */padds/\<id\>*
 **Method**: *GET*
 **Parameters**: *None*
-**Response**: Pad
+**Response**: Padd
 
 - *id*[integer]
 - *title*[string]
 - *content*[string]
 
-### 5. Update Pad
+### 5. Update Padd
 
-**Path**: */pads/\<id\>*
+**Path**: */padds/\<id\>*
 **Method**: *PUT*
 **Parameters**: *content*[string]
 **Response**: \<201\>[status_code]
 
-### 6. Delete a Pad
+### 6. Delete a Padd
 
-**Path**: */pads/\<id\>*
+**Path**: */padds/\<id\>*
 **Method**: *DELETE*
 **Parameters**: *None*
 **Response**: 204
