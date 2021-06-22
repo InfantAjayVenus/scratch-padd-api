@@ -10,7 +10,7 @@ def index():
     return 'Online!'
 
 
-@padds.route('/pads', methods=['POST'])
+@padds.route('/padds', methods=['POST'])
 def add_pad(): 
     error_code = 500
     error_message = ""
@@ -30,12 +30,12 @@ def add_pad():
         abort(error_code, error_message)
 
 
-@padds.route('/pads', methods=['GET'])
+@padds.route('/padds', methods=['GET'])
 def list_pads():
     error_code = 500
     error_message = ""
     try:
-        return jsonify([{'id': id, 'title': title} for id, title in db.session.query(Pad.id, Pad.title).all()])
+        return jsonify([{'id': id, 'title': title} for id, title in db.session.query(Pad.id, Pad.title).paginate(2, 5).items])
     
     except Exception as error:
         print('>>>>>>@list_pads<<<<<<<<>')
@@ -43,7 +43,7 @@ def list_pads():
         abort(error_code, error_message)
 
 
-@padds.route('/pads/<id>', methods=['GET'])
+@padds.route('/padds/<id>', methods=['GET'])
 def get_pad(id):
     error_code = 500
     error_message = ""
@@ -62,7 +62,7 @@ def get_pad(id):
         abort(error_code, error_message)
     
 
-@padds.route('/pads/<id>', methods=['PUT'])
+@padds.route('/padds/<id>', methods=['PUT'])
 def update_pad(id):
     error_code = 500
     error_message = ""
@@ -92,7 +92,7 @@ def update_pad(id):
         abort(error_code, error_message)
 
 
-@padds.route('/pads/<id>', methods=['DELETE'])
+@padds.route('/padds/<id>', methods=['DELETE'])
 def remove_pad(id):
     error_code = 500
     error_message = ""
